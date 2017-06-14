@@ -7,22 +7,36 @@
 //
 
 #import "ViewController.h"
+#import "SecondViewController.h"
+#import "PersonModel.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+{
+    PersonModel *model;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    model = [[PersonModel alloc] init];
+    model.name = @"张三";
+    model.sex = @"男";
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"%@---%@---%@", [self class], model.name, model.sex);
+}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)buttonClicked:(UIButton *)sender
+{
+    SecondViewController *vc = [[SecondViewController alloc] init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
